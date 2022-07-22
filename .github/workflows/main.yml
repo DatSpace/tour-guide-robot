@@ -10,6 +10,7 @@ jobs:
   build-r1Core2:
     runs-on: ubuntu-latest
     steps:
+    - run: sudo rm -rf /etc/docker/daemon.json
     - name: Change docker to experimental mode
       run: |
        echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
