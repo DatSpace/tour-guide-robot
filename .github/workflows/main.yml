@@ -9,7 +9,11 @@ on:
 jobs:
   build-r1Core2:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docker_stuff
     steps:
+    - run: echo $PWD
     - name: Remove old docker conf
       run: sudo rm -rf /etc/docker/daemon.json
     - name: Change docker to experimental mode
