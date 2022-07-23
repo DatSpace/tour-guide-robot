@@ -13,7 +13,6 @@ jobs:
       run:
         working-directory: docker_stuff/docker_core2/
     steps:
-    - run: echo $PWD
     - name: Change docker to experimental mode
       run: |
        sudo rm -rf /etc/docker/daemon.json
