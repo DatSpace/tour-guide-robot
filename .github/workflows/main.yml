@@ -18,7 +18,7 @@ jobs:
     - name: Restart docker daemon
       run: sudo systemctl restart docker
     - name: Build the Docker image
+      working-directory: docker_stuff/docker_core2/
       run: |
-       working-directory: docker_stuff/docker_core2/
        echo $PWD
        docker build --squash --tag konkarapas/r1images:r1Core2 Dockerfile
