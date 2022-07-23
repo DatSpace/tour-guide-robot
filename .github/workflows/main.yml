@@ -20,6 +20,18 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       working-directory: docker_stuff/docker_core2/
+      run: ./build-docker.sh
+  build-r1Sim2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Change docker to experimental mode
       run: |
-       echo $PWD
-       ./build-docker.sh
+       sudo rm -rf /etc/docker/daemon.json
+       echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+    - name: Restart docker daemon
+      run: sudo systemctl restart docker
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      working-directory: docker_stuff/docker_sim2/
+      run: ./build-docker.sh
