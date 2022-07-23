@@ -9,9 +9,7 @@ on:
 jobs:
   build-r1Core2:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: docker_stuff/docker_core2/
+
     steps:
     - name: Change docker to experimental mode
       run: |
@@ -21,5 +19,6 @@ jobs:
       run: sudo systemctl restart docker
     - name: Build the Docker image
       run: |
+       working-directory: docker_stuff/docker_core2/
        echo $PWD
        docker build --squash --tag konkarapas/r1images:r1Core2 Dockerfile
