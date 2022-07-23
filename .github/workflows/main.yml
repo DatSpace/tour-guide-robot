@@ -22,4 +22,4 @@ jobs:
       working-directory: docker_stuff/docker_core2/
       run: |
        echo $PWD
-       build-docker.sh
+       ./build-docker.sh
