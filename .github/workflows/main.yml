@@ -17,6 +17,7 @@ jobs:
        echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
     - name: Restart docker daemon
       run: sudo systemctl restart docker
+    - uses: actions/checkout@v3
     - name: Build the Docker image
       working-directory: docker_stuff/docker_core2/
       run: |
