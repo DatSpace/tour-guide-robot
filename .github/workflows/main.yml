@@ -11,19 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./docker_stuff
+        working-directory: docker_stuff/docker_core2/
     steps:
     - run: echo $PWD
-    - name: Remove old docker conf
-      run: sudo rm -rf /etc/docker/daemon.json
     - name: Change docker to experimental mode
       run: |
+       sudo rm -rf /etc/docker/daemon.json
        echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
     - name: Restart docker daemon
       run: sudo systemctl restart docker
-
     - name: Build the Docker image
       run: |
        echo $PWD
-       cd docker_stuff/docker_core2/
-       docker build --squash --tag konkarapas/r1images:r1Core2 docker_stuff/docker_core2/Dockerfile
+       docker build --squash --tag konkarapas/r1images:r1Core2 Dockerfile
