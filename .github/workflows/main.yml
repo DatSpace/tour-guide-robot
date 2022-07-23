@@ -22,4 +22,4 @@ jobs:
       working-directory: docker_stuff/docker_core2/
       run: |
        echo $PWD
-       docker build --squash --tag konkarapas/r1images:r1Core2 Dockerfile
+       build-docker.sh
