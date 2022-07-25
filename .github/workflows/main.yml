@@ -23,14 +23,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: konkarapas/r1images:r1Core2
-#     - name: Build the Docker image
-#       working-directory: docker_stuff/docker_core2/
-#       run: ./build-docker.sh
+    - name: Build the Docker image
+      working-directory: docker_stuff/docker_core2/
+      run: ./build-docker.sh
+    - name: Push image
+      run: docker push konkarapas/r1images:r1Core2
 #   build-r1Sim2:
 #     runs-on: ubuntu-latest
 
