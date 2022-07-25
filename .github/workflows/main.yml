@@ -18,20 +18,30 @@ jobs:
     - name: Restart docker daemon
       run: sudo systemctl restart docker
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      working-directory: docker_stuff/docker_core2/
-      run: ./build-docker.sh
-  build-r1Sim2:
-    runs-on: ubuntu-latest
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: konkarapas/r1images:r1Core2
+#     - name: Build the Docker image
+#       working-directory: docker_stuff/docker_core2/
+#       run: ./build-docker.sh
+#   build-r1Sim2:
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Change docker to experimental mode
-      run: |
-       sudo rm -rf /etc/docker/daemon.json
-       echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-    - name: Restart docker daemon
-      run: sudo systemctl restart docker
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      working-directory: docker_stuff/docker_sim2/
-      run: ./build-docker.sh
+#     steps:
+#     - name: Change docker to experimental mode
+#       run: |
+#        sudo rm -rf /etc/docker/daemon.json
+#        echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+#     - name: Restart docker daemon
+#       run: sudo systemctl restart docker
+#     - uses: actions/checkout@v3
+#     - name: Build the Docker image
+#       working-directory: docker_stuff/docker_sim2/
+#       run: ./build-docker.sh
